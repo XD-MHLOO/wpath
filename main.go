@@ -31,15 +31,19 @@ func main() {
 		if err != nil {
 			continue
 		}
-		if idx := strings.LastIndex(u.Path, "."); idx > 0 {
-			u.Path = u.Path[:idx]
-		}
-		segments := strings.SplitSeq(u.Path, "/")
-		for s := range segments {
+
+		segments := strings.Split(u.Path, "/")
+		for i, s := range segments {
 			s = strings.TrimSpace(s)
 			if s == "" {
 				continue
 			}
+			if i == len(segments)-1 {
+				if idx := strings.LastIndex(s, "."); idx > 0 {
+					s = s[:idx]
+				}
+			}
+
 			if _, ok := seen[s]; !ok {
 				fmt.Println(s)
 				seen[s] = struct{}{}
