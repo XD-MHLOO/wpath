@@ -21,24 +21,20 @@ func main() {
 		if err != nil {
 			continue
 		}
+		if idx := strings.LastIndex(u.Path, "."); idx > 0 {
+			u.Path = u.Path[:idx]
+		}
 		segments := strings.SplitSeq(u.Path, "/")
 		for s := range segments {
 			s = strings.TrimSpace(s)
 			if s == "" {
 				continue
 			}
-
-			if idx := strings.LastIndex(s, "."); idx > 0 {
-				if _, ok := seen[s[:idx]]; !ok {
-					fmt.Println(s[:idx])
-					seen[s[:idx]] = struct{}{}
-				}
-			} else {
-				if _, ok := seen[s]; !ok {
-					fmt.Println(s)
-					seen[s] = struct{}{}
-				}
+			if _, ok := seen[s]; !ok {
+				fmt.Println(s)
+				seen[s] = struct{}{}
 			}
+
 		}
 	}
 }
