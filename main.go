@@ -2,13 +2,23 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"net/url"
 	"os"
 	"strings"
 )
 
+var Version = "dev"
+
 func main() {
+	showVersion := flag.Bool("v", false, "Print version and exit")
+	flag.Parse()
+
+	if *showVersion {
+		fmt.Println("Version:", Version)
+		return
+	}
 	scanner := bufio.NewScanner(os.Stdin)
 	seen := make(map[string]struct{})
 
