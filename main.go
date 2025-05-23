@@ -28,7 +28,7 @@ func main() {
 				continue
 			}
 
-			if idx := strings.LastIndex(s, "."); idx != -1 {
+			if idx := strings.LastIndex(s, "."); idx > 0 {
 				if _, ok := seen[s[:idx]]; !ok {
 					fmt.Println(s[:idx])
 					seen[s[:idx]] = struct{}{}
