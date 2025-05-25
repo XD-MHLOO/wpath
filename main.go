@@ -20,6 +20,8 @@ func main() {
 		return
 	}
 	scanner := bufio.NewScanner(os.Stdin)
+	writer := bufio.NewWriter(os.Stdout)
+	defer writer.Flush()
 	seen := make(map[string]struct{})
 
 	for scanner.Scan() {
@@ -45,7 +47,7 @@ func main() {
 			}
 
 			if _, ok := seen[s]; !ok {
-				fmt.Println(s)
+				writer.WriteString(s + "\n")
 				seen[s] = struct{}{}
 			}
 
