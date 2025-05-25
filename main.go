@@ -34,7 +34,7 @@ func main() {
 			continue
 		}
 
-		segments := strings.Split(u.Path, "/")
+		segments := strings.Split(u.EscapedPath(), "/")
 		for i, s := range segments {
 			s = strings.TrimSpace(s)
 			if s == "" {
